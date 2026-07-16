@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git push*)",
+            "command": "cmd=$(jq -r '.tool_input.command // empty'); printf '%s' \"$cmd\" | grep -qiE '(^|[[:space:]]|:)(main|master)([[:space:]]|:|$)' && printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"main/master 직접 푸시는 CLAUDE.md 가드레일로 차단됩니다. 지정된 작업 브랜치로 푸시하세요.\"}}' || exit 0",
+            "statusMessage": "push guard"
+          }
+        ]
+      }
+    ]
+  }
+}
