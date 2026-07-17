@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0d0f12" />
+<title>My Dashboard</title>
+<link rel="manifest" href="app.webmanifest" />
+<link rel="apple-touch-icon" href="arriverse-icon.png" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    --bg:#0b0d11; --bg2:#12161f;
+    --card:rgba(255,255,255,.045); --card-hi:rgba(255,255,255,.07);
+    --line:rgba(255,255,255,.09);
+    --txt:#e9ebf0; --muted:#8b909c; --faint:#5b616e;
+    --accent:#7c93ff; --green:#37d99a; --red:#ff6b6b; --amber:#ffb84d;
+    --radius:20px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Roboto,sans-serif;
+    color:var(--txt);
+    background:
+      radial-gradient(1200px 700px at 80% -10%, #1c2540 0%, transparent 55%),
+      radial-gradient(900px 600px at 0% 100%, #10231f 0%, transparent 50%),
+      linear-gradient(160deg, var(--bg2), var(--bg));
+    background-attachment:fixed;
+    min-height:100dvh;
+    padding:clamp(16px,3vw,40px);
+    padding-bottom:calc(clamp(16px,3vw,40px) + env(safe-area-inset-bottom));
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+
+  /* ---------- top ---------- */
+  .top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+  .hello{font-size:clamp(20px,4vw,30px);font-weight:800;letter-spacing:-.02em}
+  .date{color:var(--muted);font-size:clamp(13px,2.6vw,16px);margin-top:4px;font-weight:600}
+  .clock{display:flex;gap:6px;align-items:center}
+  .seg{background:var(--card-hi);border:1px solid var(--line);border-radius:12px;
+       padding:8px 12px;font-variant-numeric:tabular-nums;font-weight:800;
+       font-size:clamp(24px,6vw,40px);letter-spacing:.02em;min-width:1.5em;text-align:center}
+  .colon{font-size:clamp(20px,5vw,34px);font-weight:800;color:var(--faint)}
+
+  /* ---------- grid ---------- */
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+        padding:20px;backdrop-filter:blur(8px)}
+  .col-4{grid-column:span 4} .col-5{grid-column:span 5}
+  .col-6{grid-column:span 6} .col-7{grid-column:span 7}
+  .col-8{grid-column:span 8} .col-12{grid-column:span 12}
+  @media(max-width:820px){ .grid > *{grid-column:1/-1 !important} }
+
+  .card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .card-t{font-size:15px;font-weight:800;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+  .card-t .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .mini{font-size:12px;color:var(--faint);font-weight:700}
+  .btn{background:var(--card-hi);border:1px solid var(--line);color:var(--muted);
+       border-radius:9px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+  .btn:hover{color:var(--txt);border-color:var(--accent)}
+
+  /* ---------- weather ---------- */
+  .wx{display:flex;flex-direction:column;gap:14px}
+  .wx-now{display:flex;align-items:center;gap:14px}
+  .wx-ico{font-size:44px;line-height:1}
+  .wx-temp{font-size:38px;font-weight:800;letter-spacing:-.02em}
+  .wx-meta{color:var(--muted);font-size:13px;font-weight:600}
+  .wx-city{font-weight:800;color:var(--txt)}
+  .wx-days{display:flex;justify-content:space-between;gap:6px;margin-top:2px}
+  .wx-day{flex:1;text-align:center;background:var(--card-hi);border:1px solid var(--line);
+          border-radius:12px;padding:9px 4px}
+  .wx-day .d{font-size:11px;color:var(--muted);font-weight:700}
+  .wx-day .i{font-size:20px;margin:5px 0}
+  .wx-day .t{font-size:12px;font-weight:800}
+  .wx-day .t small{color:var(--faint);font-weight:700}
+
+  /* ---------- claude tasks ---------- */
+  .task{padding:12px;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;
+        cursor:pointer;transition:.15s;background:rgba(255,255,255,.02)}
+  .task:last-child{margin-bottom:0}
+  .task:hover{border-color:var(--accent);background:var(--card-hi)}
+  .task-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+  .tag{font-size:10px;font-weight:800;padding:2px 7px;border-radius:6px;flex-shrink:0}
+  .tag.chat{background:rgba(124,147,255,.16);color:#a9b8ff}
+  .tag.code{background:rgba(55,217,154,.16);color:#5fe6b4}
+  .task-title{font-size:13.5px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .task-pct{font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0}
+  .bar{height:7px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+  .bar > i{display:block;height:100%;border-radius:99px;
+           background:linear-gradient(90deg,var(--accent),var(--green));transition:width .4s}
+  .st-done .bar > i{background:var(--green)}
+  .task-st{font-size:11px;font-weight:700;margin-top:7px;color:var(--faint)}
+
+  /* ---------- lists ---------- */
+  .row{display:flex;align-items:center;gap:11px;padding:9px 2px;border-bottom:1px solid rgba(255,255,255,.05)}
+  .row:last-child{border-bottom:0}
+  .chk{width:20px;height:20px;border-radius:7px;border:2px solid var(--faint);flex-shrink:0;
+       cursor:pointer;display:grid;place-items:center;transition:.15s}
+  .chk.on{background:var(--green);border-color:var(--green)}
+  .chk.on::after{content:"✓";color:#04140d;font-size:12px;font-weight:900}
+  .row .txt{flex:1;font-size:14px;font-weight:600}
+  .row.done .txt{color:var(--faint);text-decoration:line-through}
+  .row .x{color:var(--faint);cursor:pointer;font-size:16px;opacity:0;transition:.15s;padding:2px 4px}
+  .row:hover .x{opacity:1}
+  .row .x:hover{color:var(--red)}
+  .add{display:flex;gap:8px;margin-top:12px}
+  .add input{flex:1;background:var(--card-hi);border:1px solid var(--line);border-radius:10px;
+             padding:9px 12px;color:var(--txt);font-size:13px;font-family:inherit;outline:none}
+  .add input:focus{border-color:var(--accent)}
+  .add button{background:var(--accent);border:0;color:#0a0d18;border-radius:10px;
+              padding:0 15px;font-weight:800;cursor:pointer;font-size:16px}
+  .empty{color:var(--faint);font-size:13px;font-weight:600;padding:14px 2px;text-align:center}
+
+  /* ---------- habit progress ---------- */
+  .habit-sum{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .ring{--p:0;width:52px;height:52px;border-radius:50%;flex-shrink:0;
+        background:conic-gradient(var(--green) calc(var(--p)*1%), rgba(255,255,255,.08) 0);
+        display:grid;place-items:center}
+  .ring::before{content:"";position:absolute;width:38px;height:38px;border-radius:50%;background:var(--bg2)}
+  .ring span{position:relative;font-size:13px;font-weight:800}
+  .ring-w{position:relative;display:grid;place-items:center;width:52px;height:52px}
+
+  /* ---------- edit modal ---------- */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;place-items:center;
+         padding:20px;z-index:50;backdrop-filter:blur(4px)}
+  .modal.on{display:grid}
+  .sheet{background:#161b26;border:1px solid var(--line);border-radius:22px;padding:22px;
+         width:100%;max-width:400px}
+  .sheet h3{font-size:16px;font-weight:800;margin-bottom:16px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+  .field input[type=text]{width:100%;background:var(--card-hi);border:1px solid var(--line);
+    border-radius:10px;padding:10px 12px;color:var(--txt);font-size:14px;font-family:inherit;outline:none}
+  .field input:focus{border-color:var(--accent)}
+  .segs{display:flex;gap:8px}
+  .segs button{flex:1;background:var(--card-hi);border:1px solid var(--line);color:var(--muted);
+    border-radius:10px;padding:9px;font-weight:700;cursor:pointer;font-family:inherit;font-size:13px}
+  .segs button.sel{background:var(--accent);color:#0a0d18;border-color:var(--accent)}
+  .rng{width:100%;accent-color:var(--accent)}
+  .sheet-btns{display:flex;gap:10px;margin-top:8px}
+  .sheet-btns button{flex:1;border-radius:11px;padding:11px;font-weight:800;cursor:pointer;
+    font-family:inherit;font-size:14px;border:1px solid var(--line)}
+  .b-save{background:var(--accent);color:#0a0d18;border:0}
+  .b-cancel{background:transparent;color:var(--muted)}
+  .b-del{background:transparent;color:var(--red);border-color:rgba(255,107,107,.3)}
+  .foot{text-align:center;color:var(--faint);font-size:12px;font-weight:600;margin-top:26px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>
+      <div class="hello" id="hello">안녕하세요 👋</div>
+      <div class="date" id="date"></div>
+    </div>
+    <div class="clock" id="clock"></div>
+  </div>
+
+  <div class="grid">
+
+    <!-- Claude tasks -->
+    <div class="card col-5">
+      <div class="card-h">
+        <div class="card-t"><span class="dot"></span>진행 중인 작업</div>
+        <button class="btn" id="addTask">+ 추가</button>
+      </div>
+      <div id="tasks"></div>
+    </div>
+
+    <!-- todo -->
+    <div class="card col-4">
+      <div class="card-h">
+        <div class="card-t"><span class="dot" style="background:var(--amber)"></span>할 일</div>
+        <span class="mini" id="todoCount"></span>
+      </div>
+      <div id="todos"></div>
+      <div class="add">
+        <input id="todoInput" placeholder="할 일 추가…" maxlength="60" />
+        <button id="todoAdd">+</button>
+      </div>
+    </div>
+
+    <!-- weather -->
+    <div class="card col-3">
+      <div class="card-h">
+        <div class="card-t"><span class="dot" style="background:var(--green)"></span>날씨</div>
+        <button class="btn" id="cityBtn">도시</button>
+      </div>
+      <div class="wx" id="wx"><div class="empty">불러오는 중…</div></div>
+    </div>
+
+    <!-- completed today -->
+    <div class="card col-4">
+      <div class="card-h">
+        <div class="card-t"><span class="dot" style="background:var(--green)"></span>오늘 완성</div>
+        <span class="mini" id="doneCount"></span>
+      </div>
+      <div id="done"></div>
+    </div>
+
+    <!-- habits -->
+    <div class="card col-4">
+      <div class="card-h">
+        <div class="card-t"><span class="dot" style="background:#c98bff"></span>습관</div>
+        <button class="btn" id="addHabit">+ 추가</button>
+      </div>
+      <div class="habit-sum">
+        <div class="ring-w"><div class="ring" id="ring"><span id="ringPct">0%</span></div></div>
+        <div><div style="font-weight:800;font-size:14px" id="habitLabel">오늘의 루틴</div>
+             <div class="mini" id="habitSub"></div></div>
+      </div>
+      <div id="habits"></div>
+      <div class="add">
+        <input id="habitInput" placeholder="습관 추가…" maxlength="40" />
+        <button id="habitAdd">+</button>
+      </div>
+    </div>
+
+    <!-- quick links -->
+    <div class="card col-4">
+      <div class="card-h">
+        <div class="card-t"><span class="dot" style="background:#ff8bbd"></span>바로가기</div>
+        <button class="btn" id="addLink">+ 추가</button>
+      </div>
+      <div id="links"></div>
+    </div>
+
+  </div>
+
+  <div class="foot">클릭해서 편집 · 데이터는 이 브라우저에만 저장돼요</div>
+</div>
+
+<!-- task edit modal -->
+<div class="modal" id="modal">
+  <div class="sheet">
+    <h3 id="mTitle">작업 편집</h3>
+    <div class="field"><label>제목</label><input type="text" id="mName" maxlength="50" /></div>
+    <div class="field"><label>종류</label>
+      <div class="segs" id="mTags">
+        <button data-tag="chat">💬 채팅</button>
+        <button data-tag="code">⌨️ 코드</button>
+      </div>
+    </div>
+    <div class="field"><label>진행률 <b id="mPctL">0%</b></label>
+      <input type="range" class="rng" id="mPct" min="0" max="100" step="5" />
+    </div>
+    <div class="sheet-btns">
+      <button class="b-del" id="mDel">삭제</button>
+      <button class="b-cancel" id="mCancel">취소</button>
+      <button class="b-save" id="mSave">저장</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const store = {
+  get:(k,d)=>{try{return JSON.parse(localStorage.getItem(k)) ?? d}catch(e){return d}},
+  set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))
+};
+const todayKey = ()=>{const d=new Date();return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`};
+
+/* ---- daily reset ---- */
+if(store.get('day')!==todayKey()){
+  store.set('day',todayKey());
+  store.set('done',[]);
+  const hb=store.get('habits',null);
+  if(hb){hb.forEach(h=>h.on=false);store.set('habits',hb)}
+}
+
+/* ---- greeting + date + clock ---- */
+function hi(){
+  const h=new Date().getHours();
+  const g = h<5?'좋은 새벽이에요 🌙': h<12?'좋은 아침이에요 ☀️': h<18?'좋은 오후예요 🌿': '좋은 저녁이에요 🌆';
+  $('#hello').textContent=g;
+}
+const WK=['일','월','화','수','목','금','토'];
+function tick(){
+  const d=new Date();
+  $('#date').textContent=`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 ${WK[d.getDay()]}요일`;
+  const p=n=>String(n).padStart(2,'0');
+  $('#clock').innerHTML =
+    `<div class="seg">${p(d.getHours())}</div><div class="colon">:</div>`+
+    `<div class="seg">${p(d.getMinutes())}</div><div class="colon">:</div>`+
+    `<div class="seg">${p(d.getSeconds())}</div>`;
+}
+hi();tick();setInterval(tick,1000);setInterval(hi,60000);
+
+/* ================= CLAUDE TASKS ================= */
+let tasks = store.get('tasks',[
+  {name:'대시보드 첫 화면 만들기', tag:'code', pct:70},
+  {name:'엄마 선물 아이디어 정리', tag:'chat', pct:40},
+  {name:'상세페이지 카피 다듬기', tag:'chat', pct:25},
+  {name:'사진 정리 자동화', tag:'code', pct:55},
+  {name:'가계부 템플릿', tag:'chat', pct:10},
+]);
+function stLabel(p){return p>=100?'완료 ✓':p>=70?'거의 다 됐어요':p>=30?'진행 중':'막 시작'}
+function renderTasks(){
+  const el=$('#tasks');el.innerHTML='';
+  if(!tasks.length){el.innerHTML='<div class="empty">+ 추가를 눌러 작업을 넣어보세요</div>';return}
+  tasks.forEach((t,i)=>{
+    const d=document.createElement('div');
+    d.className='task'+(t.pct>=100?' st-done':'');
+    d.innerHTML=`<div class="task-top">
+        <span class="tag ${t.tag}">${t.tag==='code'?'⌨️ 코드':'💬 채팅'}</span>
+        <span class="task-title">${esc(t.name)}</span>
+        <span class="task-pct">${t.pct}%</span></div>
+      <div class="bar"><i style="width:${t.pct}%"></i></div>
+      <div class="task-st">${stLabel(t.pct)}</div>`;
+    d.onclick=()=>openEdit(i);
+    el.appendChild(d);
+  });
+}
+/* modal */
+let editIdx=-1,editTag='chat';
+function openEdit(i){
+  editIdx=i;
+  const t = i<0?{name:'',tag:'chat',pct:0}:tasks[i];
+  $('#mTitle').textContent = i<0?'작업 추가':'작업 편집';
+  $('#mName').value=t.name; editTag=t.tag;
+  $('#mPct').value=t.pct; $('#mPctL').textContent=t.pct+'%';
+  document.querySelectorAll('#mTags button').forEach(b=>b.classList.toggle('sel',b.dataset.tag===t.tag));
+  $('#mDel').style.display = i<0?'none':'block';
+  $('#modal').classList.add('on');
+}
+document.querySelectorAll('#mTags button').forEach(b=>b.onclick=()=>{
+  editTag=b.dataset.tag;
+  document.querySelectorAll('#mTags button').forEach(x=>x.classList.toggle('sel',x===b));
+});
+$('#mPct').oninput=e=>$('#mPctL').textContent=e.target.value+'%';
+$('#mSave').onclick=()=>{
+  const name=$('#mName').value.trim()||'제목 없음';
+  const pct=+$('#mPct').value;
+  if(editIdx<0)tasks.push({name,tag:editTag,pct});
+  else tasks[editIdx]={name,tag:editTag,pct};
+  store.set('tasks',tasks);renderTasks();close_();
+};
+$('#mDel').onclick=()=>{tasks.splice(editIdx,1);store.set('tasks',tasks);renderTasks();close_()};
+$('#mCancel').onclick=close_;
+$('#modal').onclick=e=>{if(e.target.id==='modal')close_()};
+function close_(){$('#modal').classList.remove('on')}
+$('#addTask').onclick=()=>openEdit(-1);
+
+/* ================= TODO / DONE ================= */
+let todos=store.get('todos',[{t:'물 마시기',d:false},{t:'오늘 할 일 정하기',d:false}]);
+let done=store.get('done',[]);
+function renderTodo(){
+  const el=$('#todos');el.innerHTML='';
+  const open=todos.filter(x=>!x.d);
+  if(!open.length)el.innerHTML='<div class="empty">할 일을 모두 끝냈어요 🎉</div>';
+  open.forEach(x=>{
+    const i=todos.indexOf(x);
+    const r=document.createElement('div');r.className='row';
+    r.innerHTML=`<div class="chk"></div><div class="txt">${esc(x.t)}</div><div class="x">✕</div>`;
+    r.querySelector('.chk').onclick=()=>{done.unshift({t:x.t});todos.splice(i,1);save()};
+    r.querySelector('.x').onclick=()=>{todos.splice(i,1);save()};
+    el.appendChild(r);
+  });
+  $('#todoCount').textContent=open.length?open.length+'개 남음':'';
+}
+function renderDone(){
+  const el=$('#done');el.innerHTML='';
+  if(!done.length){el.innerHTML='<div class="empty">완료한 일이 여기에 쌓여요</div>';$('#doneCount').textContent='';return}
+  done.forEach((x,i)=>{
+    const r=document.createElement('div');r.className='row done';
+    r.innerHTML=`<div class="chk on"></div><div class="txt">${esc(x.t)}</div><div class="x">↩</div>`;
+    r.querySelector('.chk').onclick=r.querySelector('.x').onclick=()=>{todos.push({t:x.t,d:false});done.splice(i,1);save()};
+    el.appendChild(r);
+  });
+  $('#doneCount').textContent=done.length+'개 완료';
+}
+function save(){store.set('todos',todos);store.set('done',done);renderTodo();renderDone()}
+$('#todoAdd').onclick=addTodo;
+$('#todoInput').onkeydown=e=>{if(e.key==='Enter')addTodo()};
+function addTodo(){const v=$('#todoInput').value.trim();if(!v)return;todos.push({t:v,d:false});$('#todoInput').value='';save()}
+
+/* ================= HABITS ================= */
+let habits=store.get('habits',[
+  {t:'물 8잔',on:false},{t:'25분 집중',on:false},{t:'스트레칭',on:false},{t:'독서 10분',on:false}
+]);
+function renderHabits(){
+  const el=$('#habits');el.innerHTML='';
+  habits.forEach((h,i)=>{
+    const r=document.createElement('div');r.className='row'+(h.on?' done':'');
+    r.innerHTML=`<div class="chk ${h.on?'on':''}"></div><div class="txt">${esc(h.t)}</div><div class="x">✕</div>`;
+    r.querySelector('.chk').onclick=()=>{h.on=!h.on;saveH()};
+    r.querySelector('.x').onclick=()=>{habits.splice(i,1);saveH()};
+    el.appendChild(r);
+  });
+  const on=habits.filter(h=>h.on).length,tot=habits.length||1;
+  const pct=Math.round(on/tot*100);
+  $('#ring').style.setProperty('--p',pct);$('#ringPct').textContent=pct+'%';
+  $('#habitSub').textContent=`${on} / ${habits.length} 완료`;
+}
+function saveH(){store.set('habits',habits);renderHabits()}
+$('#habitAdd').onclick=addHabit;
+$('#habitInput').onkeydown=e=>{if(e.key==='Enter')addHabit()};
+function addHabit(){const v=$('#habitInput').value.trim();if(!v)return;habits.push({t:v,on:false});$('#habitInput').value='';saveH()}
+
+/* ================= QUICK LINKS ================= */
+let links=store.get('links',[
+  {t:'Claude',u:'https://claude.ai'},{t:'Notion',u:'https://notion.so'},
+  {t:'YouTube',u:'https://youtube.com'},{t:'Gmail',u:'https://mail.google.com'}
+]);
+function renderLinks(){
+  const el=$('#links');el.innerHTML='';
+  links.forEach((l,i)=>{
+    const r=document.createElement('div');r.className='row';
+    r.innerHTML=`<div class="txt"><a href="${esc(l.u)}" style="color:var(--txt);text-decoration:none">🔗 ${esc(l.t)}</a></div><div class="x">✕</div>`;
+    r.querySelector('.x').onclick=e=>{e.preventDefault();links.splice(i,1);saveL()};
+    el.appendChild(r);
+  });
+}
+function saveL(){store.set('links',links);renderLinks()}
+$('#addLink').onclick=()=>{
+  const t=prompt('바로가기 이름 (예: Instagram)');if(!t)return;
+  let u=prompt('주소 (예: instagram.com)');if(!u)return;
+  if(!/^https?:\/\//.test(u))u='https://'+u;
+  links.push({t,u});saveL();
+};
+
+/* ================= WEATHER (Open-Meteo, 무료·키없음) ================= */
+const WMO={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',
+  61:'🌧️',63:'🌧️',65:'🌧️',71:'🌨️',73:'🌨️',75:'❄️',80:'🌦️',81:'🌧️',82:'⛈️',
+  95:'⛈️',96:'⛈️',99:'⛈️'};
+async function weather(){
+  const c=store.get('geo',{lat:37.5665,lon:126.978,name:'서울'});
+  try{
+    const u=`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}`+
+      `&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min`+
+      `&timezone=auto&forecast_days=5`;
+    const r=await(await fetch(u)).json();
+    const now=r.current, dl=r.daily;
+    let days='';
+    for(let i=0;i<5;i++){
+      const dt=new Date(dl.time[i]+'T00:00');
+      days+=`<div class="wx-day"><div class="d">${WK[dt.getDay()]}</div>
+        <div class="i">${WMO[dl.weather_code[i]]||'·'}</div>
+        <div class="t">${Math.round(dl.temperature_2m_max[i])}°<small> ${Math.round(dl.temperature_2m_min[i])}°</small></div></div>`;
+    }
+    $('#wx').innerHTML=`<div class="wx-now"><div class="wx-ico">${WMO[now.weather_code]||'·'}</div>
+        <div><div class="wx-temp">${Math.round(now.temperature_2m)}°</div>
+        <div class="wx-meta"><span class="wx-city">${esc(c.name)}</span></div></div></div>
+      <div class="wx-days">${days}</div>`;
+  }catch(e){ $('#wx').innerHTML='<div class="empty">날씨를 불러오지 못했어요</div>'; }
+}
+$('#cityBtn').onclick=async()=>{
+  const q=prompt('도시 이름 (예: 서울, Busan, Tokyo)');if(!q)return;
+  try{
+    const g=await(await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1&language=ko`)).json();
+    if(!g.results?.length){alert('도시를 찾지 못했어요');return}
+    const r=g.results[0];
+    store.set('geo',{lat:r.latitude,lon:r.longitude,name:r.name});weather();
+  }catch(e){alert('검색 실패')}
+};
+/* try device location once */
+if(!store.get('geo',null) && navigator.geolocation){
+  navigator.geolocation.getCurrentPosition(async p=>{
+    const {latitude:lat,longitude:lon}=p.coords;
+    let name='내 위치';
+    try{const g=await(await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=&count=1`)).json();}catch(e){}
+    store.set('geo',{lat,lon,name});weather();
+  },()=>weather(),{timeout:5000});
+}else weather();
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+renderTasks();renderTodo();renderDone();renderHabits();renderLinks();
+</script>
+</body>
+</html>

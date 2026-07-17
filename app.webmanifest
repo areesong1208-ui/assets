@@ -1,0 +1,13 @@
+{
+  "name": "My Dashboard",
+  "short_name": "Dashboard",
+  "description": "나만의 첫 화면 대시보드 - 시계, 날씨, 할 일, 습관, 진행 중인 작업",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0d11",
+  "theme_color": "#0b0d11",
+  "icons": [
+    { "src": "arriverse-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
