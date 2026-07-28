@@ -35,7 +35,17 @@ from playwright.sync_api import sync_playwright
 
 # ─────────────────────────── 설정 (여기만 고치면 됩니다) ───────────────────────────
 
+# 감시 대상: 한국예술종합학교 무용원 <RE : MOVE ERA (리무브 에라)>  — 22일 공연만
+SHOW_NAME = "RE : MOVE ERA (리무브 에라) — 22일"
 URL = "https://www.ntok.go.kr/ntok/pm/prfmng/performanceDetail.do?perfId=267191&mi=21008"
+
+# 감시할 날짜(일). "22"일만 봅니다. 새로고침할 때마다 이 날짜를 자동으로 다시 선택합니다.
+DATE_TEXT = "22"
+
+# ↑ 자동 날짜 선택이 안 맞으면(브라우저에서 22일이 안 눌리면) 여기에 정확한 선택자를 넣으세요.
+#   예) "a:has-text('22')"  또는  "td[data-date='2026-08-22']"  등.
+#   비워두면 아래 여러 패턴을 자동으로 시도합니다.
+DATE_SELECTOR = ""
 
 # 새로고침 간격(초). 서버가 봇으로 오해해 차단하지 않도록 10~15초를 권장합니다.
 MIN_INTERVAL = 10
@@ -63,6 +73,39 @@ def show_popup(title, message):
     root.after(100, lambda: root.focus_force())
     messagebox.showinfo(title, message, parent=root)
     root.destroy()
+
+
+def select_date(page):
+    """
+    감시할 날짜(DATE_TEXT, 기본 '22'일)를 클릭해 그 날짜 기준으로 잔여석 정보를 갱신한다.
+    새로고침하면 날짜 선택이 풀리므로 매번 다시 눌러줘야 한다.
+    반환: (성공여부, 사용한 선택자)
+    """
+    candidates = []
+    if DATE_SELECTOR:
+        candidates.append(DATE_SELECTOR)
+    # 달력/탭/목록에서 '22'만 정확히 매칭하는 흔한 패턴들
+    candidates += [
+        f"a:text-is('{DATE_TEXT}')",
+        f"button:text-is('{DATE_TEXT}')",
+        f"td:text-is('{DATE_TEXT}')",
+        f"li:text-is('{DATE_TEXT}')",
+        f"span:text-is('{DATE_TEXT}')",
+        f"[data-day='{DATE_TEXT}']",
+        f"a:has-text('{DATE_TEXT}일')",
+    ]
+    for sel in candidates:
+        try:
+            loc = page.locator(sel)
+            if loc.count() > 0:
+                target = loc.first
+                if target.is_visible():
+                    target.click(timeout=3000)
+                    page.wait_for_timeout(1500)  # 잔여석 정보 갱신 대기
+                    return True, sel
+        except Exception:
+            continue
+    return False, None
 
 
 def is_seat_available(page_text):
@@ -94,9 +137,11 @@ def is_seat_available(page_text):
 
 def main():
     print("=" * 60)
-    print("  국립극장 잔여석 감시기")
+    print("  잔여석 감시기")
+    print(f"  공연     : {SHOW_NAME}")
     print("=" * 60)
     print(f"  대상 URL : {URL}")
+    print(f"  감시 날짜: {DATE_TEXT}일 (매 새로고침마다 자동 재선택)")
     print(f"  새로고침 : {MIN_INTERVAL}~{MAX_INTERVAL}초 간격 (랜덤)")
     print("=" * 60)
 
@@ -114,7 +159,14 @@ def main():
         page = context.new_page()
         page.goto(URL, wait_until="domcontentloaded")
 
-        print("\n[준비] 브라우저 창에서 예매할 날짜(22일/23일 등)를 선택하세요.")
+        # 시작 전에 22일 자동 선택을 한 번 시도해 본다.
+        ok, used = select_date(page)
+        if ok:
+            print(f"\n[준비] {DATE_TEXT}일 자동 선택 성공 (선택자: {used}).")
+            print(f"       브라우저에 {DATE_TEXT}일의 '전석 0석'이 보이는지 확인하세요.")
+        else:
+            print(f"\n[준비] {DATE_TEXT}일 자동 선택 실패 — 브라우저 창에서 직접 {DATE_TEXT}일을 눌러주세요.")
+            print("       (계속 실패하면 monitor.py 상단 DATE_SELECTOR에 정확한 선택자를 넣으세요.)")
         print("       준비가 끝나면 이 터미널로 돌아와 Enter를 누르세요.")
         try:
             input("       ▶ 준비되면 Enter... ")
@@ -133,6 +185,8 @@ def main():
                     # 페이지 새로고침 (= '다시 보기'와 같은 효과)
                     page.reload(wait_until="domcontentloaded")
                     time.sleep(1.5)  # 내용 로딩 대기
+                    # 새로고침하면 날짜가 풀리므로 22일을 다시 선택
+                    select_date(page)
                     body_text = page.inner_text("body")
                 except Exception as e:
                     print(f"  [{check_count}] 새로고침 오류: {e} → 잠시 후 재시도")
@@ -152,6 +206,7 @@ def main():
                     # 팝업 (사용자가 확인 누를 때까지 유지)
                     show_popup(
                         "잔여석 발생!",
+                        f"[{SHOW_NAME}]\n\n"
                         f"잔여석이 감지되었습니다!\n\n{reason}\n\n"
                         f"지금 브라우저에서 '예매하기'를 누르세요!\n\n"
                         f"시각: {now}",
