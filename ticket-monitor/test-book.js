@@ -1,0 +1,1 @@
+javascript:(()=>{const PERF='267191',TIME='82193',BOOKURL='https://mbooking.ntok.go.kr/Pages/Perf/Sale/PerfSaleProcess.aspx?IdPerf='+PERF+'&IdTime='+TIME;try{if(navigator.vibrate)navigator.vibrate([200,80,200]);}catch(_){}const w=window.open(BOOKURL,'_blank');if(!w){location.href=BOOKURL;}})();
