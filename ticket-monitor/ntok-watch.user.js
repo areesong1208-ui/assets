@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         국립극장 잔여석 감시 + 자동 예매진입 (RE:MOVE ERA 22일)
 // @namespace    ntok-watch
-// @version      1.0
+// @version      1.1
 // @description  22일 잔여석 감시 → 좌석 뜨면 예매창 자동 이동 → 유의사항 '확인' 자동 클릭 (좌석선택/결제는 직접)
-// @match        https://www.ntok.go.kr/ntok/pm/prfmng/performanceDetail.do*
-// @match        https://mbooking.ntok.go.kr/*
+// @match        *://*.ntok.go.kr/*
+// @match        *://ntok.go.kr/*
 // @run-at       document-idle
 // @grant        none
 // ==/UserScript==
@@ -46,6 +46,9 @@
   }
 
   // ===== (B) 국립극장 상세페이지: 잔여석 감시 =====
+  // 상세페이지(performanceDetail)에서만 감시 시작. 그 외 ntok 페이지에선 아무것도 안 함.
+  if (location.pathname.indexOf('performanceDetail') < 0) return;
+
   let s = false, AC, cnt = 0, lastc = -1, last = '--:--:--';
   try { AC = new (window.AudioContext || window.webkitAudioContext)(); AC.resume(); } catch (e) {}
   // 아무 클릭이나 한 번 하면 소리 잠금 해제
