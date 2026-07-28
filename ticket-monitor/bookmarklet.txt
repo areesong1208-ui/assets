@@ -1,27 +1,29 @@
 국립극장 잔여석 감시 — 휴대폰 북마클릿 (RE : MOVE ERA, 22일)
 ================================================================
 
-아래 한 줄 전체를 복사해서 북마크(즐겨찾기) 주소로 저장하세요.
-(사용법은 이 파일 맨 아래 참고)
+하는 일: 22일을 자동으로 눌러 "잔여좌석 N석" 텍스트를 읽고,
+        0석이 아닌 숫자가 뜨면 → 소리 + 진동 + 알림창.
+(위치를 직접 찍을 필요 없음. 코드가 알아서 누르고 읽음.)
+
+아래 한 줄 전체를 복사해서 북마크(즐겨찾기) 주소에 저장하세요.
 
 ----------------------------- 여기부터 복사 -----------------------------
-javascript:(()=>{const D='22',MIN=10,MAX=15;let s=false;const sl=m=>new Promise(r=>setTimeout(r,m)),w=()=>(MIN+Math.random()*(MAX-MIN))*1000;function sc(){const t=document.body.innerText.replace(/\s+/g,' ');for(const a of['잔여좌석','잔여석']){const i=t.indexOf(a);if(i<0)continue;const x=t.slice(i,i+100),n=[...x.matchAll(/(\d+)\s*석/g)].map(m=>+m[1]),p=n.filter(k=>k>0);if(p.length)return Math.max(...p);if(n.length)return 0;}const m=t.match(/전석\s*(\d+)\s*석/);return m?+m[1]:-1;}function cd(){for(const e of document.querySelectorAll('a,button,td,li,span,dd,strong')){if((e.textContent||'').trim()===D&&e.offsetParent!==null){e.click();return true;}}return false;}async function lp(){alert('감시 시작! '+D+'일 잔여석이 뜨면 다시 알림창이 뜹니다. 이 탭을 켜두세요.');while(!s){cd();await sl(1500);const c=sc(),n=new Date().toLocaleTimeString();if(c>0){document.title='★잔여석'+c+'석';alert('★ 잔여석 발생! ('+D+'일)\n전석 '+c+'석\n지금 예매하기를 누르세요!\n'+n);s=true;break;}await sl(w());}}lp();})();
+javascript:(()=>{const D='22',MIN=10,MAX=15;let s=false,AC;try{AC=new(window.AudioContext||window.webkitAudioContext)();AC.resume();}catch(e){}const sl=m=>new Promise(r=>setTimeout(r,m)),w=()=>(MIN+Math.random()*(MAX-MIN))*1000;function alarm(){try{if(AC){for(let k=0;k<14;k++){const o=AC.createOscillator(),g=AC.createGain();o.connect(g);g.connect(AC.destination);o.type='square';o.frequency.value=k%2?988:784;const t=AC.currentTime+k*0.45;g.gain.setValueAtTime(0.4,t);o.start(t);o.stop(t+0.35);}}}catch(e){}if(navigator.vibrate)navigator.vibrate([500,200,500,200,500,200,600]);}function sc(){const t=document.body.innerText.replace(/\s+/g,' ');for(const a of['잔여좌석','잔여석']){const i=t.indexOf(a);if(i<0)continue;const x=t.slice(i,i+100),n=[...x.matchAll(/(\d+)\s*석/g)].map(m=>+m[1]),p=n.filter(k=>k>0);if(p.length)return Math.max(...p);if(n.length)return 0;}const m=t.match(/전석\s*(\d+)\s*석/);return m?+m[1]:-1;}function cd(){for(const e of document.querySelectorAll('a,button,td,li,span,dd,strong')){if((e.textContent||'').trim()===D&&e.offsetParent!==null){e.click();return true;}}return false;}async function lp(){alert('감시 시작! '+D+'일 잔여석이 뜨면 소리·진동으로 알립니다. 이 탭을 켜두세요.');while(!s){cd();await sl(1500);const c=sc(),nt=new Date().toLocaleTimeString();if(c>0){document.title='★잔여석'+c+'석';alarm();alert('★ 잔여석 발생! ('+D+'일)\n전석 '+c+'석\n지금 예매하기를 누르세요!\n'+nt);s=true;break;}await sl(w());}}lp();})();
 ------------------------------ 여기까지 복사 ------------------------------
 
 
-■ 삼성 인터넷에서 등록/실행하는 법
-  1) 예매 페이지를 연 상태에서 아무 곳이나 북마크(별표)로 하나 저장한다.
-  2) 하단 메뉴 → 북마크 → 방금 저장한 북마크를 길게 눌러 '편집'.
-  3) 주소(URL) 칸의 내용을 지우고, 위 'javascript:...' 한 줄을 붙여넣어 저장.
-     이름은 알아보기 쉽게 '잔여석감시'로.
-  4) 예매 페이지에서 22일이 보이게 해둔 뒤, 주소창에 '잔여석감시'를 입력하면
-     아래에 그 북마크가 뜬다 → 탭하면 실행된다.
-  5) "감시 시작!" 알림이 뜨면 성공. 잔여석이 뜨면 다시 알림창이 뜬다.
+■ 삼성 인터넷 등록/실행
+  1) 예매 페이지에서 아무 북마크(별표)나 하나 저장.
+  2) 하단 메뉴 → 북마크 → 저장한 것 길게 눌러 '편집'.
+  3) 주소(URL) 칸을 지우고 위 'javascript:...' 한 줄을 붙여넣어 저장. 이름은 '잔여석감시'.
+  4) 예매 페이지에서 22일이 보이게 해둔 뒤, 주소창에 '잔여석감시' 입력 → 뜨는 북마크 탭.
+  5) "감시 시작!" 알림이 뜨면 성공. 잔여석 뜨면 소리·진동으로 알림.
 
-■ 크롬(안드로이드)도 방법 동일:
-  북마크 저장 → 편집 → URL을 위 코드로 교체 → 주소창에 이름 입력해 실행.
+■ 소리가 안 나면
+  - 폰 무음/진동 모드를 해제하고 볼륨을 올려두세요(진동은 무음이어도 옵니다).
+  - 첫 실행 시 "감시 시작!" 알림의 확인을 눌러야 소리가 열리는 브라우저도 있어요.
 
 ■ 주의
-  - 이 탭을 끄거나 다른 앱으로 오래 나가 있으면 멈춥니다. 화면 켜두세요.
-  - 22일을 누를 때 페이지가 통째로 새로고침되는 구조면 멈출 수 있어요.
-    그럴 땐 알림이 안 뜨니, 몇 분 뒤에도 조용하면 다시 탭해서 실행하세요.
+  - 이 탭을 끄거나 다른 앱으로 오래 나가면 멈춥니다. 화면 켜두세요.
+  - 22일 누를 때 페이지가 통째로 새로고침되는 구조면 멈출 수 있어요.
+    몇 분 뒤에도 조용하면 다시 탭해서 실행하세요.
