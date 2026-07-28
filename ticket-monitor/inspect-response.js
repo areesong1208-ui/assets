@@ -1,0 +1,1 @@
+javascript:(()=>{fetch('/ntok/pm/prfmng/selectSeatListInfo.do',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8','X-Requested-With':'XMLHttpRequest'},body:'id=267191&timeId=82193'}).then(r=>r.text()).then(t=>{alert('길이:'+t.length+'\n\n'+t.slice(0,900));}).catch(e=>alert('오류:'+e));})();
