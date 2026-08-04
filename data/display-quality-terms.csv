@@ -222,3 +222,20 @@ PQ-220,해상도·구조,Binocular disparity,양안 시차,양안 디스패리�
 PQ-221,해상도·구조,Depth perception,깊이 지각,입체감,,거리를 입체적으로 인지하는 것.,3D 화질 요소.,IDMS Ch17
 PQ-222,해상도·구조,Multiview,다시점,멀티뷰,,여러 시점 영상을 제공하는 무안경 3D 방식.,,IDMS Ch17
 PQ-223,휘도/명암,Monocular luminance,단안 휘도,,,한쪽 눈이 받는 휘도.,양안 휘도(binocular)와 대비.,IDMS Ch17
+PQ-224,해상도·구조,Contrast modulation,명암 변조,콘트라스트 변조,CM,(Lmax−Lmin)/(Lmax+Lmin)로 나타낸 인접 명암 차이.,해상력 판정 기준(임계). Michelson과 동일 정의.,IDMS Ch07
+PQ-225,해상도·구조,Spatial frequency response,공간주파수 응답,,SFR,공간주파수별 명암 전달 특성(디스플레이 MTF).,약어 SFR. MTF와 유사 개념.,IDMS Ch07
+PQ-226,해상도·구조,Effective resolution,유효 해상도,실효 해상도,,실제로 구분 가능한 해상도.,명목(nominal) 해상도와 구분.,IDMS Ch07
+PQ-227,해상도·구조,Pixel fill factor,화소 충전율,필 팩터,,화소 영역 중 실제 발광/투과 면적 비율.,개구율(aperture ratio)과 유사.,IDMS Ch07
+PQ-228,결함·불량,Shadowing,섀도잉,그림자 현상,,인접 화소·구조로 생기는 그림자/얼룩 현상.,,IDMS Ch07
+PQ-229,해상도·구조,Grille pattern,격자 패턴,그릴 패턴,,흑백 줄무늬(격자) 해상 시험 패턴.,라인/그릴 휘도·명암 측정에 사용.,IDMS Ch07
+PQ-230,해상도·구조,Luminance step response,휘도 계단 응답,,,공간적 휘도 급변(에지)에 대한 표시 응답.,선명도/링잉과 연관.,IDMS Ch07
+PQ-231,해상도·구조,Virtual image,허상,가상 이미지,,광학계를 통해 눈에 맺히는 가상의 상(HMD·AR/VR).,'허상' 권장. 근안(near-eye) 문맥.,IDMS Ch19
+PQ-232,해상도·구조,Field of view,시야각(FOV),시야 범위,FOV,눈이 볼 수 있는 각도 범위.,viewing angle(패널 시야각)과 다름! 오역 주의. 약어 FOV.,IDMS Ch19
+PQ-233,해상도·구조,Eyebox,아이박스,,,상이 제대로 보이는 눈 위치의 허용 공간.,음차 '아이박스'.,IDMS Ch19
+PQ-234,해상도·구조,Eye relief,아이 릴리프,눈 이격거리,,렌즈에서 눈(동공)까지의 거리.,안경 착용 여유와 관련.,IDMS Ch19
+PQ-235,해상도·구조,Exit pupil,출사동,사출동,,광학계에서 빛이 나오는 유효 구경(눈 위치).,eyebox와 연관.,IDMS Ch19
+PQ-236,해상도·구조,Virtual image focal distance,허상 초점거리,가상 이미지 초점거리,,허상이 맺히는 겉보기 거리.,디옵터로도 표현.,IDMS Ch19
+PQ-237,규격·측정,Diopter,디옵터,,D,초점거리의 역수(굴절력 단위).,허상 거리 표현. 약어 D.,IDMS Ch19
+PQ-238,결함·불량,Geometric distortion,기하 왜곡,기하학적 왜곡,,상이 기하학적으로 일그러지는 현상(핀쿠션/배럴).,광학계 왜곡.,IDMS Ch19
+PQ-239,해상도·구조,Interpupillary distance,동공간 거리,양안 간격,IPD,좌우 눈 동공 사이 거리.,약어 IPD. 양안 HMD 정렬.,IDMS Ch19
+PQ-240,휘도/명암,Michelson contrast,마이컬슨 명암비,,,(Lmax−Lmin)/(Lmax+Lmin)로 정의한 명암 대비.,contrast modulation(PQ-224)과 동일 정의.,IDMS Ch19
