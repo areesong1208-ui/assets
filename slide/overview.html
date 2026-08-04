@@ -1,0 +1,224 @@
+<title>화질 용어 시멘틱 데이터 — 개요 슬라이드</title>
+<style>
+  :root{
+    --bg:#E7ECF1; --slide:#FFFFFF; --ink:#12202E; --muted:#5A6B7B;
+    --line:#DCE3EA; --line-soft:#EAEFF3;
+    --accent:#0FA3B8; --accent-deep:#0A7C8C; --accent-soft:#E4F4F6;
+    --amber:#C77E22; --amber-soft:#F6ECD9;
+    --slate:#7C8B99;
+    --good:#1F9D6B; --bad:#C6522E; --on-accent:#FFFFFF;
+    --shadow:0 24px 60px -24px rgba(16,40,60,.35);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#070C12; --slide:#111C27; --ink:#EAF1F6; --muted:#93A6B5;
+      --line:#233442; --line-soft:#1A2833;
+      --accent:#2AC3D7; --accent-deep:#7DE0EC; --accent-soft:#13303A;
+      --amber:#E7A94A; --amber-soft:#2C2517;
+      --slate:#8598A6;
+      --good:#3FC287; --bad:#E27A54; --on-accent:#04141A;
+      --shadow:0 24px 60px -24px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#E7ECF1; --slide:#FFFFFF; --ink:#12202E; --muted:#5A6B7B;
+    --line:#DCE3EA; --line-soft:#EAEFF3; --accent:#0FA3B8; --accent-deep:#0A7C8C;
+    --accent-soft:#E4F4F6; --amber:#C77E22; --amber-soft:#F6ECD9; --slate:#7C8B99;
+    --good:#1F9D6B; --bad:#C6522E; --on-accent:#FFFFFF; --shadow:0 24px 60px -24px rgba(16,40,60,.35);
+  }
+  :root[data-theme="dark"]{
+    --bg:#070C12; --slide:#111C27; --ink:#EAF1F6; --muted:#93A6B5;
+    --line:#233442; --line-soft:#1A2833; --accent:#2AC3D7; --accent-deep:#7DE0EC;
+    --accent-soft:#13303A; --amber:#E7A94A; --amber-soft:#2C2517; --slate:#8598A6;
+    --good:#3FC287; --bad:#E27A54; --on-accent:#04141A; --shadow:0 24px 60px -24px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",
+      system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    min-height:100vh;padding:3vmin;
+    -webkit-font-smoothing:antialiased;
+  }
+  .stage{width:min(1200px,96vw)}
+  .slide{
+    width:100%;aspect-ratio:16/9;background:var(--slide);
+    border-radius:1.4cqw;box-shadow:var(--shadow);
+    container-type:size;
+    padding:4.2cqw 4.4cqw 3.4cqw;
+    display:flex;flex-direction:column;gap:2.2cqw;overflow:hidden;
+    position:relative;
+  }
+  .slide::before{ /* calibration hairline accent */
+    content:"";position:absolute;left:0;top:0;height:100%;width:.55cqw;
+    background:linear-gradient(180deg,var(--accent),var(--amber));
+  }
+  .num{font-variant-numeric:tabular-nums}
+
+  /* ---- header ---- */
+  header{display:flex;flex-direction:column;gap:.7cqw}
+  .eyebrow{
+    font-size:1.05cqw;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--accent-deep);font-weight:700;
+  }
+  h1{font-size:2.55cqw;line-height:1.12;font-weight:800;letter-spacing:-.01em;
+     text-wrap:balance;max-width:64cqw}
+  .purpose{font-size:1.28cqw;line-height:1.5;color:var(--muted);max-width:70cqw}
+  .purpose b{color:var(--ink);font-weight:700;
+    box-shadow:inset 0 -0.5cqw 0 var(--accent-soft)}
+
+  /* ---- main grid ---- */
+  main{display:grid;grid-template-columns:1.32fr 1fr;gap:2.6cqw;flex:1;min-height:0}
+  .col{display:flex;flex-direction:column;gap:1.7cqw;min-height:0}
+  .label{
+    font-size:1.0cqw;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--slate);font-weight:700;margin-bottom:.9cqw;display:block;
+  }
+
+  /* pipeline */
+  .pipe{display:flex;align-items:stretch;gap:.5cqw}
+  .step{
+    flex:1;background:var(--accent-soft);border:1px solid var(--line);
+    border-radius:.8cqw;padding:.95cqw .7cqw;display:flex;flex-direction:column;gap:.35cqw;
+  }
+  .step .n{font-size:.9cqw;font-weight:800;color:var(--accent-deep);
+    font-variant-numeric:tabular-nums}
+  .step .t{font-size:1.06cqw;font-weight:700;line-height:1.2}
+  .arrow{align-self:center;color:var(--accent);font-size:1.5cqw;font-weight:700}
+  .pipe-note{margin-top:.9cqw;font-size:1.0cqw;color:var(--muted)}
+  .pipe-note b{color:var(--accent-deep);font-weight:800}
+
+  /* before/after */
+  .ba{border:1px solid var(--line);border-radius:.9cqw;overflow:hidden}
+  .ba-row{display:grid;grid-template-columns:1.15fr 1fr 1fr;align-items:center;
+    padding:.82cqw 1.1cqw;font-size:1.08cqw;border-top:1px solid var(--line-soft)}
+  .ba-row:first-child{border-top:none}
+  .ba-en{color:var(--muted);font-weight:600}
+  .ba-old{color:var(--bad);text-decoration:line-through;text-decoration-thickness:.12cqw;
+    opacity:.85}
+  .ba-new{color:var(--good);font-weight:800}
+  .ba-new::before{content:"→ ";color:var(--slate);font-weight:600}
+
+  /* stat tiles */
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:.9cqw}
+  .tile{background:var(--slide);border:1px solid var(--line);border-radius:.9cqw;
+    padding:1.05cqw 1.15cqw;display:flex;flex-direction:column;gap:.15cqw}
+  .tile .v{font-size:3.1cqw;font-weight:800;line-height:1;letter-spacing:-.02em}
+  .tile .k{font-size:1.0cqw;color:var(--muted);font-weight:600}
+  .tile.accent{background:var(--accent-soft);border-color:transparent}
+  .tile.accent .v{color:var(--accent-deep)}
+
+  /* source bar */
+  .srcbar{display:flex;height:1.5cqw;border-radius:.75cqw;overflow:hidden;
+    border:1px solid var(--line)}
+  .srcbar i{display:block;height:100%}
+  .s1{background:var(--slate)} .s2{background:var(--accent)} .s3{background:var(--amber)}
+  .legend{display:flex;gap:1.3cqw;margin-top:.8cqw;flex-wrap:wrap}
+  .legend span{font-size:.98cqw;color:var(--muted);display:flex;align-items:center;gap:.4cqw}
+  .dot{width:.85cqw;height:.85cqw;border-radius:.2cqw;display:inline-block}
+
+  /* category chips */
+  .chips{display:flex;flex-wrap:wrap;gap:.5cqw}
+  .chip{font-size:.98cqw;padding:.4cqw .8cqw;border-radius:2cqw;
+    border:1px solid var(--line);color:var(--ink);background:var(--slide);font-weight:600}
+
+  /* footer freq strip */
+  footer{border-top:1px solid var(--line);padding-top:1.5cqw;
+    display:flex;align-items:center;gap:1.2cqw}
+  .freq-label{font-size:.98cqw;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--slate);font-weight:800;white-space:nowrap}
+  .freq{display:flex;flex-wrap:wrap;gap:.45cqw}
+  .fchip{font-size:.96cqw;padding:.35cqw .72cqw;border-radius:.45cqw;
+    background:var(--amber-soft);color:var(--ink);font-weight:700;
+    font-variant-numeric:tabular-nums}
+  .fchip.hot{background:var(--accent);color:var(--on-accent)}
+</style>
+
+<div class="stage">
+  <div class="slide">
+    <header>
+      <span class="eyebrow">삼성디스플레이 · 화질 용어 시멘틱 데이터</span>
+      <h1>IDMS에 자주 쓰이는 화질 표현으로 만든 시멘틱 데이터</h1>
+      <p class="purpose">생소한 <b>IDMS 표준 용어</b>를 실제로 자주 쓰이는 표현 중심으로 정리해,
+        영어→한글 <b>번역·답변의 정확도와 표기 일관성</b>을 높입니다.</p>
+    </header>
+
+    <main>
+      <!-- LEFT -->
+      <section class="col">
+        <div>
+          <span class="label">적용 파이프라인</span>
+          <div class="pipe">
+            <div class="step"><span class="n">01</span><span class="t">영문 원문</span></div>
+            <span class="arrow">→</span>
+            <div class="step"><span class="n">02</span><span class="t">용어 자동 탐지</span></div>
+            <span class="arrow">→</span>
+            <div class="step"><span class="n">03</span><span class="t">프롬프트 주입<br>(표준 표기 강제)</span></div>
+            <span class="arrow">→</span>
+            <div class="step"><span class="n">04</span><span class="t">표준 한글 번역</span></div>
+          </div>
+          <p class="pipe-note">100단어당 <b>20개</b> 용어 주입 · 오역위험 용어 <b>100%</b> 포착</p>
+        </div>
+
+        <div>
+          <span class="label">번역 표기 교정 &nbsp;(주입 전 → 후)</span>
+          <div class="ba">
+            <div class="ba-row"><span class="ba-en">Peak luminance</span><span class="ba-old">최고 밝기</span><span class="ba-new">최대휘도</span></div>
+            <div class="ba-row"><span class="ba-en">Mura</span><span class="ba-old">얼룩·불균일</span><span class="ba-new">무라</span></div>
+            <div class="ba-row"><span class="ba-en">Burn-in</span><span class="ba-old">화면 번짐</span><span class="ba-new">번인</span></div>
+            <div class="ba-row"><span class="ba-en">Color shift</span><span class="ba-old">색 이동</span><span class="ba-new">색편이</span></div>
+            <div class="ba-row"><span class="ba-en">Backlight bleeding</span><span class="ba-old">백라이트 출혈</span><span class="ba-new">빛샘</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT -->
+      <section class="col">
+        <div class="stats">
+          <div class="tile accent"><span class="v num">191</span><span class="k">표준 용어</span></div>
+          <div class="tile"><span class="v num">10</span><span class="k">IDMS 챕터</span></div>
+          <div class="tile"><span class="v num">3</span><span class="k">데이터 소스</span></div>
+          <div class="tile"><span class="v num">7</span><span class="k">화질 범주</span></div>
+        </div>
+
+        <div>
+          <span class="label">데이터 소스 구성</span>
+          <div class="srcbar">
+            <i class="s1" style="width:28.8%"></i>
+            <i class="s2" style="width:51.3%"></i>
+            <i class="s3" style="width:19.9%"></i>
+          </div>
+          <div class="legend">
+            <span><i class="dot" style="background:var(--slate)"></i>일반 용어 <b class="num">&nbsp;55</b></span>
+            <span><i class="dot" style="background:var(--accent)"></i>IDMS 추출 <b class="num">&nbsp;98</b></span>
+            <span><i class="dot" style="background:var(--amber)"></i>컬러스케일 <b class="num">&nbsp;38</b></span>
+          </div>
+        </div>
+
+        <div>
+          <span class="label">범주</span>
+          <div class="chips">
+            <span class="chip">휘도/명암</span><span class="chip">색</span><span class="chip">계조</span>
+            <span class="chip">결함·불량</span><span class="chip">시간응답</span>
+            <span class="chip">해상도·구조</span><span class="chip">규격·측정</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span class="freq-label">자주 쓰이는 표현</span>
+      <div class="freq">
+        <span class="fchip hot">APL</span><span class="fchip hot">Delta E</span>
+        <span class="fchip hot">Peak luminance</span><span class="fchip">EOTF</span>
+        <span class="fchip">ABL</span><span class="fchip">VRR</span><span class="fchip">GtG</span>
+        <span class="fchip">Blooming</span><span class="fchip">Black crush</span>
+        <span class="fchip">무라</span><span class="fchip">번인</span><span class="fchip">색편이</span>
+        <span class="fchip">시야각</span><span class="fchip">빛샘</span>
+      </div>
+    </footer>
+  </div>
+</div>
