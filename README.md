@@ -7,7 +7,8 @@
 | 경로 | 내용 |
 |------|------|
 | [`docs/업무계획.md`](docs/업무계획.md) | 업무 계획서 (목표·단계·스키마·일정·결정사항) |
-| [`data/display-quality-terms.csv`](data/display-quality-terms.csv) | 화질 용어 시멘틱 데이터 (**104개 용어**: 일반 55 + IDMS 추출 49) |
+| [`data/display-quality-terms.csv`](data/display-quality-terms.csv) | 화질 용어 시멘틱 데이터 (**161개 용어**: 일반 55 + IDMS 68 + 컬러스케일 38) |
+| [`data/colorscale-term-mapping.csv`](data/colorscale-term-mapping.csv) | 유튜버(컬러스케일) 표현 → 표준 용어 **매칭 테이블** (55개, 치환 아님) |
 | [`prompts/translation-qa-prompt.md`](prompts/translation-qa-prompt.md) | LLM 프롬프트 주입 템플릿 |
 | [`scripts/build_glossary_prompt.py`](scripts/build_glossary_prompt.py) | 원문에서 용어 자동 탐지 → 프롬프트 블록 생성 |
 
@@ -16,7 +17,14 @@
 `id, category, en_term, ko_term, ko_synonyms, abbr, definition_ko, translation_note, source`
 
 - 범주(category): `휘도/명암`, `색`, `계조`, `결함·불량`, `시간응답`, `해상도·구조`, `규격·측정`
-- 출처(source): `일반(seed)` 또는 실제 추출 챕터(예: `IDMS Ch01`, `IDMS Ch04`) — 용어 추적성 확보
+- 출처(source): `일반(seed)`, 추출 챕터(예: `IDMS Ch01`), 또는 `컬러스케일` — 용어 추적성 확보
+
+## 유튜버 표현 매칭 (컬러스케일)
+
+디스플레이 리뷰 유튜버 **컬러스케일**의 실제 표현을 표준 용어에 **매칭**(치환 아님)한 테이블: [`data/colorscale-term-mapping.csv`](data/colorscale-term-mapping.csv)
+- `expression`(유튜버 원어) → `glossary_id`/`glossary_term`(표준 용어), `ko_used_by_youtuber`(구어체)
+- 예: `자글거림`→스파클(PQ-122), `들뜬 블랙`→Elevated black(PQ-132), `역잔상`→오버슈트(PQ-135), `암부 뭉개짐`→블랙 크러시(PQ-130)
+- 구어체·현장 표현을 표준 용어로 이어주어, 번역·질의응답 시 표기 일관성을 높임
 
 ## 데이터 출처 (IDMS)
 
