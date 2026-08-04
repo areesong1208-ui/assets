@@ -103,3 +103,22 @@ PQ-101,색,Primary color scale,원색 계조,주색 계조,,R/G/B 각 원색의 
 PQ-102,휘도/명암,Gain,게인,이득,,신호 대비 출력의 증폭 정도.,'이득'과 병용. contrast 조정과 연관.,IDMS Ch06
 PQ-103,휘도/명암,Offset,오프셋,,,신호 0에서의 출력 기준값.,brightness/블랙레벨 조정과 연관.,IDMS Ch06
 PQ-104,휘도/명암,Tone scale,톤 스케일,계조 특성,,입력 대비 출력 밝기의 전체 특성.,gamma/EOTF와 유사 개념.,IDMS Ch06
+PQ-105,휘도/명암,Sequential contrast,순차 명암비,다크룸 명암비,,흰/검은 전체화면을 시간차로 측정한 명암비.,on-off·암실(darkroom) 명암비. 동시(simultaneous) 명암비와 구분.,IDMS Ch05
+PQ-106,휘도/명암,Peak contrast,피크 명암비,,,최대 밝기 대비 최소 밝기의 명암비.,,IDMS Ch05
+PQ-107,휘도/명암,Starfield contrast,스타필드 명암비,별점 명암비,,검은 배경에 소수 밝은 점 패턴으로 측정한 명암비.,,IDMS Ch05
+PQ-108,휘도/명암,Corner-box contrast,코너박스 명암비,,,모서리 박스 패턴으로 측정한 명암비.,,IDMS Ch05
+PQ-109,색,Chromaticity gamut area,색도 색역 면적,,,색도도에서 원색이 이루는 삼각형 면적.,'색역 면적'. 상대(relative) 버전 있음.,IDMS Ch05
+PQ-110,색,White-point accuracy,백색점 정확도,,,목표 백색점과 실제 백색점의 일치 정도.,백색점(white point)과 함께.,IDMS Ch05
+PQ-111,휘도/명암,Dimming range,디밍 범위,"조광 범위,휘도 조정 범위",,최소~최대 휘도 조정(조광) 범위.,luminance adjustment range와 동일. '조광 범위' 병기.,IDMS Ch05
+PQ-112,결함·불량,Halation,헐레이션,광번짐,,밝은 영역 주변으로 빛이 번지는 현상.,'광번짐'으로 풀어쓰기 가능.,IDMS Ch05
+PQ-113,휘도/명암,Loading,로딩,휘도 로딩,,표시 면적·밝기에 따라 최대 휘도가 변하는 현상.,'화면 로딩(screen loading)'. 자발광 특성.,IDMS Ch05
+PQ-114,휘도/명암,Perceptual-contrast length,지각 명암 길이,,PCL,계조의 지각적 명암 길이를 나타내는 지표.,약어 PCL 유지.,IDMS Ch05
+PQ-115,색,Color gamut volume,색역 볼륨,색역 부피,,3D 색공간(CIELAB)에서 색역의 부피.,'색역 면적(2D)'과 구분. CIELAB gamut volume.,IDMS Ch05
+PQ-116,색,Gamut ring diagram,색역 링 다이어그램,색역 링,,명도별 색역 커버리지를 링으로 표현한 도표.,'gamut rings'. 색역 커버리지 시각화.,IDMS Ch05
+PQ-117,결함·불량,Luminance uniformity,휘도 균일도,휘도 불균일도,,화면 전체에서 휘도가 일정한 정도.,nonuniformity=불균일도. 실무는 불균일도를 주로 규정.,IDMS Ch08
+PQ-118,결함·불량,Chromaticity uniformity,색도 균일도,색도 불균일도,,화면 전체에서 색도가 일정한 정도.,최대 색도차(Δu'v' 등)로 규정.,IDMS Ch08
+PQ-119,결함·불량,Area uniformity,면적 균일도,,,넓은 영역을 기준으로 한 균일도.,표본(sampled) 균일도와 구분.,IDMS Ch08
+PQ-120,결함·불량,Sampled uniformity,표본 균일도,샘플드 균일도,,화면 여러 점을 표본 측정한 균일도.,,IDMS Ch08
+PQ-121,결함·불량,Contrast uniformity,명암비 균일도,,,화면 전체 명암비의 균일 정도.,,IDMS Ch08
+PQ-122,결함·불량,Display sparkle,스파클,반짝임,,표면 처리 등으로 생기는 미세한 반짝임 결함.,안티글레어 표면 문맥. 음차 '스파클'.,IDMS Ch08
+PQ-123,결함·불량,Graininess,입상성,그레인,,미세하게 얼룩덜룩한(알갱이) 느낌.,sparkle와 연관. '입상성' 권장.,IDMS Ch08
