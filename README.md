@@ -7,15 +7,23 @@
 | 경로 | 내용 |
 |------|------|
 | [`docs/업무계획.md`](docs/업무계획.md) | 업무 계획서 (목표·단계·스키마·일정·결정사항) |
-| [`data/display-quality-terms.csv`](data/display-quality-terms.csv) | 화질 용어 시멘틱 데이터 (시드, 55개 용어) |
+| [`data/display-quality-terms.csv`](data/display-quality-terms.csv) | 화질 용어 시멘틱 데이터 (**95개 용어**: 일반 55 + IDMS 추출 40) |
 | [`prompts/translation-qa-prompt.md`](prompts/translation-qa-prompt.md) | LLM 프롬프트 주입 템플릿 |
 | [`scripts/build_glossary_prompt.py`](scripts/build_glossary_prompt.py) | 원문에서 용어 자동 탐지 → 프롬프트 블록 생성 |
 
 ## 시멘틱 데이터 스키마
 
-`id, category, en_term, ko_term, ko_synonyms, abbr, definition_ko, translation_note`
+`id, category, en_term, ko_term, ko_synonyms, abbr, definition_ko, translation_note, source`
 
-범주(category): `휘도/명암`, `색`, `계조`, `결함·불량`, `시간응답`, `해상도·구조`, `규격·측정`
+- 범주(category): `휘도/명암`, `색`, `계조`, `결함·불량`, `시간응답`, `해상도·구조`, `규격·측정`
+- 출처(source): `일반(seed)` 또는 실제 추출 챕터(예: `IDMS Ch01`, `IDMS Ch04`) — 용어 추적성 확보
+
+## 데이터 출처 (IDMS)
+
+용어는 **IDMS (Information Display Measurements Standard, SID/ICDM 2025)** 영문 원문에서 추출합니다.
+구글 드라이브에 챕터별 PDF로 보관되어 있으며, 챕터를 처리할 때마다 용어집이 확장됩니다.
+- 처리 완료: Ch01(Introduction), Ch04(Visual Assessment)
+- 진행 예정: Ch05~Ch21 (Fundamental/Color Scale/Uniformity/Viewing Angle/Temporal/Motion/HDR 등)
 
 ## 활용 방향
 
