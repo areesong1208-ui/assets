@@ -7,7 +7,7 @@
 | 경로 | 내용 |
 |------|------|
 | [`docs/업무계획.md`](docs/업무계획.md) | 업무 계획서 (목표·단계·스키마·일정·결정사항) |
-| [`data/display-quality-terms.csv`](data/display-quality-terms.csv) | 화질 용어 시멘틱 데이터 (**95개 용어**: 일반 55 + IDMS 추출 40) |
+| [`data/display-quality-terms.csv`](data/display-quality-terms.csv) | 화질 용어 시멘틱 데이터 (**104개 용어**: 일반 55 + IDMS 추출 49) |
 | [`prompts/translation-qa-prompt.md`](prompts/translation-qa-prompt.md) | LLM 프롬프트 주입 템플릿 |
 | [`scripts/build_glossary_prompt.py`](scripts/build_glossary_prompt.py) | 원문에서 용어 자동 탐지 → 프롬프트 블록 생성 |
 

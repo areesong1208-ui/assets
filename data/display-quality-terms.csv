@@ -94,3 +94,12 @@ PQ-092,해상도·구조,Limiting resolution,한계 해상도,극한 해상도,,
 PQ-093,시간응답,Visual angle,시각,시야각(視角),,대상이 눈에 대해 이루는 각도.,시야각(viewing angle)과 다름! 오역 주의. '시각(視角)'.,IDMS Ch04
 PQ-094,해상도·구조,Over-scan,오버스캔,,,신호 영역이 화면 밖으로 넘어가 잘리는 것.,'dot by dot'=1:1 표시와 대비.,IDMS Ch04
 PQ-095,시간응답,Persistence,지속성,잔광,,프레임 간 휘도가 유지되는 정도.,'잔광'으로도 번역. 잔상(image sticking)과 구분.,IDMS Ch04
+PQ-096,계조,Color scale,컬러스케일,색 계조,,원색 채널별 계조(휘도) 특성.,그레이스케일(gray scale)의 색 채널 버전.,IDMS Ch06
+PQ-097,휘도/명암,Gamma determination,감마 산출,감마 결정,,계조별 휘도 데이터로 감마 값을 구하는 것.,'감마 측정/산출'로 번역.,IDMS Ch06
+PQ-098,휘도/명암,GOGO model,GOGO 모델,,GOGO,감마 곡선을 Gain-Offset-Gamma-Offset로 모델링.,약어 GOGO 유지. 모델 피팅 감마 산출에 사용.,IDMS Ch06
+PQ-099,휘도/명암,Gamma-distortion ratio,감마 왜곡비,,GDR,실제 감마가 이상 곡선에서 벗어난 정도.,위치별(positional)·RMS 변형 있음.,IDMS Ch06
+PQ-100,휘도/명암,Directional gamma,방향별 감마,,,시야 방향에 따른 감마 값.,시야각 의존 감마.,IDMS Ch06
+PQ-101,색,Primary color scale,원색 계조,주색 계조,,R/G/B 각 원색의 계조 특성.,,IDMS Ch06
+PQ-102,휘도/명암,Gain,게인,이득,,신호 대비 출력의 증폭 정도.,'이득'과 병용. contrast 조정과 연관.,IDMS Ch06
+PQ-103,휘도/명암,Offset,오프셋,,,신호 0에서의 출력 기준값.,brightness/블랙레벨 조정과 연관.,IDMS Ch06
+PQ-104,휘도/명암,Tone scale,톤 스케일,계조 특성,,입력 대비 출력 밝기의 전체 특성.,gamma/EOTF와 유사 개념.,IDMS Ch06
