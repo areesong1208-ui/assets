@@ -11,6 +11,8 @@
 | [`data/colorscale-term-mapping.csv`](data/colorscale-term-mapping.csv) | 유튜버(컬러스케일) 표현 → 표준 용어 **매칭 테이블** (55개, 치환 아님) |
 | [`prompts/translation-qa-prompt.md`](prompts/translation-qa-prompt.md) | LLM 프롬프트 주입 템플릿 |
 | [`scripts/build_glossary_prompt.py`](scripts/build_glossary_prompt.py) | 원문에서 용어 자동 탐지 → 프롬프트 블록 생성 |
+| [`scripts/eval_coverage.py`](scripts/eval_coverage.py) | 커버리지·오역위험 지표 측정 (품질 검증) |
+| [`eval/translation-demo.md`](eval/translation-demo.md) | 주입 전/후 번역 비교 데모 (검증 결과) |
 
 ## 시멘틱 데이터 스키마
 

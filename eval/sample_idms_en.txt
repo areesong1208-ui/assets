@@ -1,0 +1,17 @@
+This report summarizes the picture quality evaluation of the OLED display under test (DUT).
+The peak luminance reached 1000 cd/m2 at low APL, but the auto brightness limiter (ABL)
+reduced the sustained luminance to about 250 cd/m2 at 100% APL. The full-screen contrast
+ratio was effectively infinite in a dark room, yet the ambient contrast ratio (ACR) dropped
+significantly due to surface reflectance. We observed mura in the upper region and slight
+image sticking after a two-hour static pattern; no permanent burn-in was detected.
+
+Color gamut coverage was 99% DCI-P3 and the color accuracy (Delta E) stayed below 2 after
+calibration. In the gray scale measurement, the gamma curve followed the target EOTF closely,
+although black crush appeared in the near-black region and banding was visible in smooth
+gradients. Gray-to-gray (GtG) response time was 1 ms, which minimized motion blur, but
+overdrive caused visible overshoot on some transitions.
+
+Viewing angle performance showed measurable color shift off-axis. Luminance uniformity was
+within 90%, and no backlight bleeding was present because the panel is emissive. During
+variable refresh rate (VRR) operation, gamma shift produced perceptible flicker in the
+peripheral vision. The white point was close to D65, and metamerism was negligible.
