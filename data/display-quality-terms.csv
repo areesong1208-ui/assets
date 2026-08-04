@@ -190,3 +190,14 @@ PQ-188,색,Lightness,명도,,L*,밝기의 지각량(CIELAB L*).,휘도(luminance
 PQ-189,색,Hue angle,색상각,,,CIELAB 등에서 색상을 각도로 나타낸 값.,,IDMS Ch21
 PQ-190,색,Color difference equation,색차 공식,,,두 색의 차이를 계산하는 식(CIE76/CIEDE2000).,ΔE 계산식. 색차(PQ-016)와 연관.,IDMS Ch21
 PQ-191,색,Chromaticity shift,색도 편이,,,조건에 따른 색도좌표의 변화.,색편이(color shift)의 색도 계량.,IDMS Ch21
+PQ-192,규격·측정,Specular reflection,정반사,경면 반사,,입사각=반사각으로 거울처럼 반사되는 성분.,'경면 반사'. 확산 반사(diffuse)와 대비.,IDMS Ch11
+PQ-193,규격·측정,Diffuse reflection,확산 반사,난반사,,여러 방향으로 흩어져 반사되는 성분.,'난반사'와 병용. 정반사와 대비.,IDMS Ch11
+PQ-194,규격·측정,Reflectance factor,반사율 계수,반사 계수,,완전 확산 반사 기준 대비 반사 비율.,reflectance(반사율)와 정의 구분.,IDMS Ch11
+PQ-195,규격·측정,Luminance factor,휘도 계수,,,기준 백색 대비 표면의 휘도 비율.,반사 측정 문맥.,IDMS Ch11
+PQ-196,결함·불량,Haze,헤이즈,흐림,,정반사 주변으로 퍼지는 뿌연 반사 성분.,안티글레어(AG) 표면 특성. '흐림'.,IDMS Ch11
+PQ-197,휘도/명암,Contrast under ambient illumination,주변광 하 명암비,앰비언트 명암비,,조명이 있는 실환경에서의 명암비.,ACR(PQ-139)과 동일 계열. 반사율에 좌우.,IDMS Ch11
+PQ-198,규격·측정,Specular included / excluded,정반사 포함/제외,,SCI/SCE,측정 시 정반사 성분을 포함(SCI)/제외(SCE).,약어 SCI/SCE 유지.,IDMS Ch11
+PQ-199,규격·측정,Hemispherical reflection,반구 반사,반구면 반사,,전 방향(반구)에서 조명·수광하여 측정한 반사.,specular included/excluded와 함께 규정.,IDMS Ch11
+PQ-200,규격·측정,Transmittance,투과율,,,빛이 통과하는 비율.,반사율(reflectance)과 짝. 투과형 문맥.,IDMS Ch11
+PQ-201,규격·측정,Transmission coefficient,투과 계수,,,입사 대비 투과되는 빛의 비율 계수.,투과율과 연관.,IDMS Ch11
+PQ-202,규격·측정,Reflectance standard,반사 표준,반사 기준판,,반사 측정 교정에 쓰는 기준 반사판.,측정 캘리브레이션용.,IDMS Ch11

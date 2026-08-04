@@ -7,7 +7,7 @@
 | 경로 | 내용 |
 |------|------|
 | [`docs/업무계획.md`](docs/업무계획.md) | 업무 계획서 (목표·단계·스키마·일정·결정사항) |
-| [`data/display-quality-terms.csv`](data/display-quality-terms.csv) | 화질 용어 시멘틱 데이터 (**191개 용어**: 일반 55 + IDMS 98 + 컬러스케일 38) |
+| [`data/display-quality-terms.csv`](data/display-quality-terms.csv) | 화질 용어 시멘틱 데이터 (**202개 용어**: 일반 55 + IDMS 109 + 컬러스케일 38) |
 | [`data/colorscale-term-mapping.csv`](data/colorscale-term-mapping.csv) | 유튜버(컬러스케일) 표현 → 표준 용어 **매칭 테이블** (55개, 치환 아님) |
 | [`prompts/translation-qa-prompt.md`](prompts/translation-qa-prompt.md) | LLM 프롬프트 주입 템플릿 |
 | [`scripts/build_glossary_prompt.py`](scripts/build_glossary_prompt.py) | 원문에서 용어 자동 탐지 → 프롬프트 블록 생성 |
@@ -32,8 +32,8 @@
 
 용어는 **IDMS (Information Display Measurements Standard, SID/ICDM 2025)** 영문 원문에서 추출합니다.
 구글 드라이브에 챕터별 PDF로 보관되어 있으며, 챕터를 처리할 때마다 용어집이 확장됩니다.
-- 처리 완료: Ch01, Ch04, Ch05, Ch06, Ch08, Ch09, Ch10, Ch12, Ch20, Ch21 (화질 핵심 챕터)
-- 미처리: Ch02·03·07·11·13~19 (템플릿/셋업/반사/물리·전기/프로젝터/3D/근안 등 — 화질 직결도 낮음)
+- 처리 완료: Ch01, Ch04, Ch05, Ch06, Ch08, Ch09, Ch10, Ch11(반사·투과), Ch12, Ch20, Ch21
+- 미처리: Ch02·03·07·13~19 (템플릿/셋업/물리·전기/프로젝터/3D/근안 등 — 화질 직결도 낮음)
 
 ## 활용 방향
 
