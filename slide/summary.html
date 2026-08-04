@@ -1,0 +1,204 @@
+<title>화질 용어 시멘틱 데이터 — 진행 요약</title>
+<style>
+  :root{
+    --bg:#E7ECF1; --slide:#FFFFFF; --ink:#12202E; --muted:#5A6B7B;
+    --line:#DCE3EA; --line-soft:#EAEFF3;
+    --accent:#0FA3B8; --accent-deep:#0A7C8C; --accent-soft:#E4F4F6;
+    --amber:#C77E22; --amber-soft:#F6ECD9;
+    --slate:#7C8B99; --good:#1F9D6B; --bad:#C6522E; --on-accent:#FFFFFF;
+    --shadow:0 24px 60px -24px rgba(16,40,60,.35);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#070C12; --slide:#111C27; --ink:#EAF1F6; --muted:#93A6B5;
+      --line:#233442; --line-soft:#1A2833;
+      --accent:#2AC3D7; --accent-deep:#7DE0EC; --accent-soft:#13303A;
+      --amber:#E7A94A; --amber-soft:#2C2517;
+      --slate:#8598A6; --good:#3FC287; --bad:#E27A54; --on-accent:#04141A;
+      --shadow:0 24px 60px -24px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#E7ECF1; --slide:#FFFFFF; --ink:#12202E; --muted:#5A6B7B;
+    --line:#DCE3EA; --line-soft:#EAEFF3; --accent:#0FA3B8; --accent-deep:#0A7C8C;
+    --accent-soft:#E4F4F6; --amber:#C77E22; --amber-soft:#F6ECD9; --slate:#7C8B99;
+    --good:#1F9D6B; --bad:#C6522E; --on-accent:#FFFFFF; --shadow:0 24px 60px -24px rgba(16,40,60,.35);
+  }
+  :root[data-theme="dark"]{
+    --bg:#070C12; --slide:#111C27; --ink:#EAF1F6; --muted:#93A6B5;
+    --line:#233442; --line-soft:#1A2833; --accent:#2AC3D7; --accent-deep:#7DE0EC;
+    --accent-soft:#13303A; --amber:#E7A94A; --amber-soft:#2C2517; --slate:#8598A6;
+    --good:#3FC287; --bad:#E27A54; --on-accent:#04141A; --shadow:0 24px 60px -24px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",
+      system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    min-height:100vh;padding:3vmin;-webkit-font-smoothing:antialiased;
+  }
+  .stage{width:min(1200px,96vw)}
+  .slide{
+    width:100%;aspect-ratio:16/9;background:var(--slide);
+    border-radius:1.4cqw;box-shadow:var(--shadow);container-type:size;
+    padding:4cqw 4.4cqw 3.2cqw;display:flex;flex-direction:column;gap:2cqw;
+    overflow:hidden;position:relative;
+  }
+  .slide::before{content:"";position:absolute;left:0;top:0;height:100%;width:.55cqw;
+    background:linear-gradient(180deg,var(--accent),var(--amber))}
+  .num{font-variant-numeric:tabular-nums}
+
+  header{display:flex;flex-direction:column;gap:.6cqw}
+  .eyebrow{font-size:1.05cqw;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--accent-deep);font-weight:700}
+  h1{font-size:2.5cqw;line-height:1.12;font-weight:800;letter-spacing:-.01em;
+    text-wrap:balance;max-width:70cqw}
+  .purpose{font-size:1.22cqw;line-height:1.45;color:var(--muted);max-width:72cqw}
+
+  main{display:grid;grid-template-columns:1.28fr 1fr;gap:2.6cqw;flex:1;min-height:0}
+  .col{display:flex;flex-direction:column;gap:1.5cqw;min-height:0}
+  .label{font-size:1.0cqw;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--slate);font-weight:700;margin-bottom:.85cqw;display:block}
+
+  /* process steps */
+  .process{display:flex;flex-direction:column;gap:.7cqw}
+  .pstep{display:grid;grid-template-columns:2.1cqw 1fr;gap:.9cqw;align-items:start}
+  .pstep .n{width:2.1cqw;height:2.1cqw;border-radius:50%;background:var(--accent);
+    color:var(--on-accent);font-size:1.0cqw;font-weight:800;display:flex;
+    align-items:center;justify-content:center;font-variant-numeric:tabular-nums;margin-top:.1cqw}
+  .pstep .body{display:flex;flex-direction:column;gap:.1cqw}
+  .pstep .t{font-size:1.2cqw;font-weight:700;line-height:1.2}
+  .pstep .s{font-size:1.0cqw;color:var(--muted);line-height:1.3}
+  .pstep .s b{color:var(--accent-deep);font-weight:700}
+
+  /* deliverables chips */
+  .chips{display:flex;flex-wrap:wrap;gap:.5cqw}
+  .chip{font-size:.98cqw;padding:.42cqw .8cqw;border-radius:.5cqw;
+    border:1px solid var(--line);color:var(--ink);background:var(--slide);font-weight:600}
+  .chip b{color:var(--accent-deep)}
+
+  /* stat tiles */
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:.9cqw}
+  .tile{background:var(--slide);border:1px solid var(--line);border-radius:.9cqw;
+    padding:1cqw 1.1cqw;display:flex;flex-direction:column;gap:.1cqw}
+  .tile .v{font-size:2.9cqw;font-weight:800;line-height:1;letter-spacing:-.02em}
+  .tile .k{font-size:.98cqw;color:var(--muted);font-weight:600}
+  .tile.accent{background:var(--accent-soft);border-color:transparent}
+  .tile.accent .v{color:var(--accent-deep)}
+
+  /* source bar */
+  .srcbar{display:flex;height:1.4cqw;border-radius:.7cqw;overflow:hidden;border:1px solid var(--line)}
+  .srcbar i{display:block;height:100%}
+  .s1{background:var(--slate)} .s2{background:var(--accent)} .s3{background:var(--amber)}
+  .legend{display:flex;gap:1.1cqw;margin-top:.7cqw;flex-wrap:wrap}
+  .legend span{font-size:.95cqw;color:var(--muted);display:flex;align-items:center;gap:.4cqw}
+  .dot{width:.85cqw;height:.85cqw;border-radius:.2cqw;display:inline-block}
+
+  /* validation highlight */
+  .valid{background:var(--accent-soft);border-radius:.9cqw;padding:1.1cqw 1.2cqw;
+    display:flex;flex-direction:column;gap:.5cqw}
+  .valid .vt{font-size:1.0cqw;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent-deep);font-weight:800}
+  .valid ul{list-style:none;display:flex;flex-direction:column;gap:.35cqw}
+  .valid li{font-size:1.04cqw;line-height:1.3;padding-left:1.3cqw;position:relative}
+  .valid li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:800}
+  .valid li b{color:var(--ink);font-weight:800}
+
+  footer{border-top:1px solid var(--line);padding-top:1.3cqw;
+    display:flex;align-items:center;gap:1.2cqw}
+  .flabel{font-size:.98cqw;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--slate);font-weight:800;white-space:nowrap}
+  .next{font-size:1.02cqw;color:var(--muted);line-height:1.35}
+  .next b{color:var(--ink);font-weight:700}
+</style>
+
+<div class="stage">
+  <div class="slide">
+    <header>
+      <span class="eyebrow">Project Summary · 2026.08 · 삼성디스플레이</span>
+      <h1>화질 용어 시멘틱 데이터 구축 — 진행 요약</h1>
+      <p class="purpose">IDMS 영문 문서의 한글 번역·답변 품질 향상을 위해, 화질(Picture Quality) 용어를
+        자주 쓰이는 표현 중심으로 정제한 시멘틱 데이터를 구축했습니다.</p>
+    </header>
+
+    <main>
+      <!-- LEFT: process + deliverables -->
+      <section class="col">
+        <div>
+          <span class="label">진행 경과</span>
+          <div class="process">
+            <div class="pstep"><span class="n">1</span><div class="body">
+              <span class="t">업무 계획 수립</span>
+              <span class="s">목표·6단계 추진·스키마 정의</span></div></div>
+            <div class="pstep"><span class="n">2</span><div class="body">
+              <span class="t">시드 용어집 구축</span>
+              <span class="s">일반 화질 용어 <b>55개</b> · 7개 범주</span></div></div>
+            <div class="pstep"><span class="n">3</span><div class="body">
+              <span class="t">IDMS 16개 챕터 추출</span>
+              <span class="s">실문서 기반 표준 용어 <b>147개</b> (출처 추적)</span></div></div>
+            <div class="pstep"><span class="n">4</span><div class="body">
+              <span class="t">유튜버(컬러스케일) 표현 매칭</span>
+              <span class="s">현장·구어체 → 표준 용어 <b>55개 매핑</b> (신규 38)</span></div></div>
+            <div class="pstep"><span class="n">5</span><div class="body">
+              <span class="t">프롬프트 주입 + 품질 검증</span>
+              <span class="s">주입 전/후 번역 비교로 개선 실증</span></div></div>
+          </div>
+        </div>
+
+        <div>
+          <span class="label">산출물</span>
+          <div class="chips">
+            <span class="chip">용어집 CSV <b>240</b></span>
+            <span class="chip">매칭 테이블 <b>55</b></span>
+            <span class="chip">프롬프트 주입 도구</span>
+            <span class="chip">커버리지 평가</span>
+            <span class="chip">번역 검증 데모</span>
+            <span class="chip">업무계획서</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: metrics + composition + validation -->
+      <section class="col">
+        <div class="stats">
+          <div class="tile accent"><span class="v num">240</span><span class="k">표준 용어</span></div>
+          <div class="tile"><span class="v num">16</span><span class="k">IDMS 챕터</span></div>
+          <div class="tile"><span class="v num">3</span><span class="k">데이터 소스</span></div>
+          <div class="tile"><span class="v num">7</span><span class="k">화질 범주</span></div>
+        </div>
+
+        <div>
+          <span class="label">데이터 소스 구성</span>
+          <div class="srcbar">
+            <i class="s1" style="width:22.9%"></i>
+            <i class="s2" style="width:61.3%"></i>
+            <i class="s3" style="width:15.8%"></i>
+          </div>
+          <div class="legend">
+            <span><i class="dot" style="background:var(--slate)"></i>일반 <b class="num">&nbsp;55</b></span>
+            <span><i class="dot" style="background:var(--accent)"></i>IDMS <b class="num">147</b></span>
+            <span><i class="dot" style="background:var(--amber)"></i>컬러스케일 <b class="num">38</b></span>
+          </div>
+        </div>
+
+        <div class="valid">
+          <span class="vt">검증 결과</span>
+          <ul>
+            <li>100단어당 <b>20개</b> 용어 주입</li>
+            <li>오역위험 용어 <b>100%</b> 포착</li>
+            <li>핵심 <b>12개</b> 표기 교정 (최대휘도·무라·번인·색편이·빛샘 등)</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span class="flabel">다음 단계</span>
+      <span class="next"><b>매처에 한글 구어체·약어 탐지 연동</b> · 사내 표준 용어집 대조·정정 ·
+        실제 IDMS 문서로 대규모 커버리지 검증</span>
+    </footer>
+  </div>
+</div>
