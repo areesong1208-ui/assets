@@ -201,3 +201,24 @@ PQ-199,규격·측정,Hemispherical reflection,반구 반사,반구면 반사,,�
 PQ-200,규격·측정,Transmittance,투과율,,,빛이 통과하는 비율.,반사율(reflectance)과 짝. 투과형 문맥.,IDMS Ch11
 PQ-201,규격·측정,Transmission coefficient,투과 계수,,,입사 대비 투과되는 빛의 비율 계수.,투과율과 연관.,IDMS Ch11
 PQ-202,규격·측정,Reflectance standard,반사 표준,반사 기준판,,반사 측정 교정에 쓰는 기준 반사판.,측정 캘리브레이션용.,IDMS Ch11
+PQ-203,규격·측정,Native-performance mode,네이티브 성능 모드,기본 성능 모드,,모든 화질 보정을 끈 기본 상태 모드.,측정 기준 모드. modified/enhanced와 대비.,IDMS Ch02
+PQ-204,규격·측정,Modified-performance mode,변경 성능 모드,보정 모드,,색·명암·선명도 등을 변경한 성능 모드.,native 모드와 대비.,IDMS Ch02
+PQ-205,해상도·구조,Angular resolution,각 해상도,각도 해상도,PPD,시야 각도당 화소/사이클 수(PPD/CPD).,시청거리에 의존. 해상도(px)와 구분.,IDMS Ch02
+PQ-206,해상도·구조,Pixel pitch,픽셀 피치,화소 피치,,인접 화소 중심 간 거리(µm).,화소밀도(PPI)와 연관.,IDMS Ch02
+PQ-207,해상도·구조,Sharpness,선명도,샤프니스,,경계가 또렷한 정도.,보정 항목. 과하면 링잉/오버슈트 유발.,IDMS Ch02
+PQ-208,해상도·구조,Cycles per degree,도당 사이클,,CPD,시야 1도당 명암 반복(선쌍) 수.,인간 시각 한계 ~60 CPD. 공간주파수의 각 표현.,IDMS Ch02
+PQ-209,규격·측정,Darkroom conditions,암실 조건,다크룸 조건,,주변광을 차단한 측정 환경.,명암비·휘도 측정 기준 환경.,IDMS Ch03
+PQ-210,규격·측정,Warm-up time,예열 시간,워밍업 시간,,측정 전 디스플레이를 안정화하는 시간.,통상 20~30분.,IDMS Ch03
+PQ-211,규격·측정,Measurement field angle,측정 시야각,측정 개구각,,LMD가 화면에서 빛을 받는 각도(개구).,측정 스폿 크기를 결정.,IDMS Ch03
+PQ-212,규격·측정,Normal direction,법선 방향,수직 방향,,화면 표면에 수직인 기준 방향(θ=0°).,시야각 측정의 기준.,IDMS Ch03
+PQ-213,규격·측정,Spot photometer,스폿 광도계,스폿 포토미터,,화면의 작은 영역 휘도를 측정하는 계측기.,LMD의 한 종류.,IDMS Ch03
+PQ-214,규격·측정,Array detector,어레이 디텍터,이미징 디텍터,,화면을 2차원 이미지로 측정하는 카메라형 계측기.,스폿 방식과 대비. mura/균일도 측정.,IDMS Ch03
+PQ-215,해상도·구조,Stereoscopic display,입체 디스플레이,스테레오 디스플레이,,좌/우안에 다른 영상을 줘 입체감을 만드는 디스플레이.,안경식. 무안경(autostereoscopic)과 대비.,IDMS Ch17
+PQ-216,해상도·구조,Autostereoscopic display,무안경 입체 디스플레이,오토스테레오,,안경 없이 입체를 보여주는 디스플레이.,다시점(multiview) 등.,IDMS Ch17
+PQ-217,결함·불량,3D crosstalk,3D 크로스토크,3D 누화,,한쪽 눈 영상이 다른 눈에 새어드는 현상(3D 고스팅).,일반 크로스토크(PQ-030)의 3D 특화.,IDMS Ch17
+PQ-218,휘도/명암,Stereoscopic extinction ratio,소광비,스테레오 소광비,,원치 않는 3D 채널을 차단하는 비율.,클수록 크로스토크 적음.,IDMS Ch17
+PQ-219,휘도/명암,Stereoscopic contrast ratio,스테레오 명암비,3D 명암비,,3D 상태에서의 명암비(좌우안 평균).,,IDMS Ch17
+PQ-220,해상도·구조,Binocular disparity,양안 시차,양안 디스패리티,,좌우안 이미지 위치 차이(깊이 지각의 근거).,parallax(시차)와 연관.,IDMS Ch17
+PQ-221,해상도·구조,Depth perception,깊이 지각,입체감,,거리를 입체적으로 인지하는 것.,3D 화질 요소.,IDMS Ch17
+PQ-222,해상도·구조,Multiview,다시점,멀티뷰,,여러 시점 영상을 제공하는 무안경 3D 방식.,,IDMS Ch17
+PQ-223,휘도/명암,Monocular luminance,단안 휘도,,,한쪽 눈이 받는 휘도.,양안 휘도(binocular)와 대비.,IDMS Ch17
