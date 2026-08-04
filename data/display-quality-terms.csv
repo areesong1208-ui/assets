@@ -160,3 +160,33 @@ PQ-158,규격·측정,ICC profile,ICC 프로파일,,,장치 색 특성을 기술
 PQ-159,결함·불량,Anti-glare,안티글레어,눈부심 방지,AG,표면 난반사로 반사를 줄이는 처리.,'AG'. sparkle(자글거림) 유발 가능.,컬러스케일
 PQ-160,결함·불량,Anti-reflection,반사 방지,반사 방지 코팅,AR,코팅으로 표면 반사를 줄이는 처리.,'AR'. anti-glare와 방식이 다름.,컬러스케일
 PQ-161,결함·불량,Image retention,일시적 잔상,,,잠시 남았다 사라지는 가역적 잔상.,번인(영구)과 구분. image sticking과 동일 계열.,컬러스케일
+PQ-162,해상도·구조,Viewing direction,관측 방향,시야 방향,,"화면을 바라보는 방향(극각 θ, 방위각 φ).",시야각(각도 범위)과 구분.,IDMS Ch09
+PQ-163,해상도·구조,Design viewing direction,설계 관측 방향,,,정면(법선)이 아닌 특정 방향을 기준으로 설계된 방향.,차량용 등. 법선 대신 기준으로 사용.,IDMS Ch09
+PQ-164,휘도/명암,Viewing-angle luminance change ratio,시야각 휘도 변화비,,,관측 방향에 따른 휘도 변화 비율.,,IDMS Ch09
+PQ-165,색,Viewing-angle color variation,시야각 색 변화,,,관측 방향에 따른 색 변화.,색편이(color shift)의 시야각 계량.,IDMS Ch09
+PQ-166,해상도·구조,Polar angle,극각,,θ,법선으로부터 기울어진 각도.,방위각(azimuth)과 함께 관측 방향 규정.,IDMS Ch09
+PQ-167,해상도·구조,Azimuth angle,방위각,,φ,화면 평면에서의 회전 각도.,극각과 함께 관측 방향 규정.,IDMS Ch09
+PQ-168,시간응답,Rise time,상승 시간,,,밝기가 낮음→높음으로 변하는 데 걸리는 시간.,fall time과 짝. 응답속도 구성.,IDMS Ch10
+PQ-169,시간응답,Fall time,하강 시간,,,밝기가 높음→낮음으로 변하는 데 걸리는 시간.,rise time과 짝.,IDMS Ch10
+PQ-170,시간응답,Jitter,지터,,,신호·타이밍의 미세한 시간적 흔들림.,음차 '지터'.,IDMS Ch10
+PQ-171,시간응답,Latency,지연시간,레이턴시,,입력~반응까지의 시간 지연.,input lag(입력 지연)과 연관.,IDMS Ch10
+PQ-172,시간응답,Temporal contrast sensitivity,시간 대비 민감도,,,시간적 밝기 변화에 대한 눈의 민감도.,플리커 지각과 연관.,IDMS Ch10
+PQ-173,시간응답,Duty cycle,듀티비,듀티 사이클,,한 주기에서 켜진 시간의 비율.,PWM과 연관.,IDMS Ch10
+PQ-174,결함·불량,Short-term image retention,단기 잔상,,,짧게 남았다 사라지는 가역적 잔상.,장기 잔상·번인과 구분.,IDMS Ch10
+PQ-175,시간응답,Motion artifact,모션 아티팩트,동영상 잔상,,움직이는 영상에서 생기는 화질 저하(블러·저더 등).,,IDMS Ch12
+PQ-176,시간응답,Moving-edge blur,이동 에지 블러,이동 경계 번짐,MEB,움직이는 경계가 번져 보이는 정도.,motion blur의 정량 측정.,IDMS Ch12
+PQ-177,시간응답,Blurred-edge time,블러 에지 시간,,BET,이동 에지 블러를 시간으로 나타낸 지표.,MPRT 계열 지표.,IDMS Ch12
+PQ-178,시간응답,Smooth pursuit,부드러운 추적,추종 안구운동,,움직이는 물체를 눈이 따라가는 운동.,모션 블러 지각의 원리.,IDMS Ch12
+PQ-179,휘도/명암,Perceptual Quantizer,지각 양자화기,PQ 커브,PQ,HDR용 EOTF 곡선(SMPTE ST 2084).,약어 PQ. HLG와 대비. 'PQ 커브'.,IDMS Ch20
+PQ-180,휘도/명암,Mastering display metadata,마스터링 디스플레이 메타데이터,,,HDR 콘텐츠 제작 기준 디스플레이 정보(최대/최소 휘도 등).,톤 매핑에 사용.,IDMS Ch20
+PQ-181,휘도/명암,Hybrid Log-Gamma,하이브리드 로그 감마,,HLG,방송용 HDR 전달 방식(EOTF).,약어 HLG 유지. PQ와 대비.,IDMS Ch20
+PQ-182,색,Color space,색공간,,,"색을 좌표로 표현하는 체계(sRGB, CIELAB 등).",,IDMS Ch21
+PQ-183,색,CIELAB,시엘랩,CIE L*a*b*,,"균등에 가까운 3차원 색공간(L*, a*, b*).",표기 'CIELAB' 또는 'CIE L*a*b*'.,IDMS Ch21
+PQ-184,색,Uniform color space,균등 색공간,,,지각 차이가 좌표 거리에 비례하는 색공간.,CIELAB/CIELUV.,IDMS Ch21
+PQ-185,색,Color appearance model,색 외관 모델,,CAM,관측 조건을 반영해 색 지각을 예측하는 모델.,약어 CAM(CIECAM02 등).,IDMS Ch21
+PQ-186,색,Chromaticity diagram,색도도,색도 다이어그램,,색도좌표를 평면에 나타낸 도표(CIE xy 등).,,IDMS Ch21
+PQ-187,색,Chromatic adaptation,색순응,,,광원 변화에 눈이 적응해 백색을 일정하게 지각.,화이트밸런스의 원리.,IDMS Ch21
+PQ-188,색,Lightness,명도,,L*,밝기의 지각량(CIELAB L*).,휘도(luminance)와 구분되는 지각량.,IDMS Ch21
+PQ-189,색,Hue angle,색상각,,,CIELAB 등에서 색상을 각도로 나타낸 값.,,IDMS Ch21
+PQ-190,색,Color difference equation,색차 공식,,,두 색의 차이를 계산하는 식(CIE76/CIEDE2000).,ΔE 계산식. 색차(PQ-016)와 연관.,IDMS Ch21
+PQ-191,색,Chromaticity shift,색도 편이,,,조건에 따른 색도좌표의 변화.,색편이(color shift)의 색도 계량.,IDMS Ch21
